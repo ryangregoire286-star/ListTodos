@@ -46,6 +46,7 @@ namespace ListTodos
             public static bool IsPlaced() => true; 
         };
 
+
         public static string UpperTextString(string s)
         {
             return s.ToUpper();
@@ -64,19 +65,40 @@ namespace ListTodos
             {
                 if (IsPlaced())
                 {
+
+                    List<string> todosListed = new List<string>();
+
                     var client = new MongoClient(GetURI());
 
                     string s = IsTodo("RJ");
 
-                    MessagesPrinted("Enter First Todo: ");
-                    string todo1 = Console.ReadLine() ?? "";
+                    int CountTodos = 0;
 
-                    MessagesPrinted("Enter Second Todo: ");
-                    string todo2 = Console.ReadLine() ?? "";
+                    CountTodos = int.Parse(Console.ReadLine() ?? "");
 
-                    List<string> todosListed = new List<string>();
-                    todosListed.Add(todo1);
-                    todosListed.Add(todo2);
+                    string breakMessage = Console.ReadLine() ?? "";
+
+                    for (int i = 0; i < CountTodos + 1; i++)
+                    {
+
+                        MessagesPrinted("Enter First Todo: ");
+                        string todo1 = Console.ReadLine() ?? "";
+
+                        MessagesPrinted("Enter Second Todo: ");
+                        string todo2 = Console.ReadLine() ?? "";
+
+                        if (breakMessage == "break")
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            todosListed.Add(todo1);
+                            todosListed.Add(todo2);
+                        }
+                        
+
+                    }
 
                     foreach (var todo in todosListed)
                     {
